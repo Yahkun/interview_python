@@ -265,7 +265,7 @@ print p2.name  # aaa
 print Person.name  # aaa
 ```
 
-这里`p1.name="bbb"`是实例调用了类变量,这其实和上面第一个问题一样,就是函数传参的问题,`p1.name`一开始是指向的类变量`name="aaa"`,但是在实例的作用域里把类变量的引用改变了,就变成了一个实例变量,self.name不再引用Person的类变量name了.
+这里`p1.name="bbb"`是实例调用了类变量，这其实和上面第一个问题一样，就是函数传参的问题：`p1.name`一开始是指向的类变量`name="aaa"`，但是在实例的作用域里把类变量的引用改变了，就变成了一个实例变量，`self.name`不再引用 Person 的类变量 name 了。
 
 可以看看下面的例子:
 
@@ -285,9 +285,9 @@ print Person.name  # [1]
 
 ## 5 Python自省
 
-这个也是python彪悍的特性.
+这个也是python彪悍的特性。
 
-自省就是面向对象的语言所写的程序在运行时,所能知道对象的类型.简单一句就是运行时能够获得对象的类型.比如type(),dir(),getattr(),hasattr(),isinstance().
+自省就是**面向对象的语言所写的程序在运行时，能知道对象的类型**。简单一句就是运行时能够获得对象的类型。比如type(), dir(), getattr(), hasattr(), isinstance()。
 
 ```python
 a = [1,2,3]
@@ -297,11 +297,9 @@ print type(a),type(b),type(c) # <type 'list'> <type 'dict'> <type 'bool'>
 print isinstance(a,list)  # True
 ```
 
-
-
 ## 6 字典推导式
 
-可能你见过列表推导时,却没有见过字典推导式,在2.7中才加入的:
+可能你见过列表推导时，却没有见过字典推导式，在2.7中才加入的:
 
 ```python
 d = {key: value for (key, value) in iterable}
@@ -312,8 +310,8 @@ d = {key: value for (key, value) in iterable}
 ```python
 >>> class MyClass():
 ...     def __init__(self):
-...             self.__superprivate = "Hello"
-...             self._semiprivate = ", world!"
+...         self.__superprivate = "Hello"
+...         self._semiprivate = ", world!"
 ...
 >>> mc = MyClass()
 >>> print mc.__superprivate
@@ -326,42 +324,42 @@ AttributeError: myClass instance has no attribute '__superprivate'
 {'_MyClass__superprivate': 'Hello', '_semiprivate': ', world!'}
 ```
 
-`__foo__`:一种约定,Python内部的名字,用来区别其他用户自定义的命名,以防冲突，就是例如`__init__()`,`__del__()`,`__call__()`这些特殊方法
+`__foo__`：一种约定，Python内部的名字，用来区别其他用户自定义的命名，以防冲突，就是例如`__init__()`, `__del__()`, `__call__()`这些特殊方法
 
-`_foo`:一种约定,用来指定变量私有.程序员用来指定私有变量的一种方式.不能用from module import * 导入，其他方面和公有一样访问；
+`_foo`：一种约定，用来指定变量私有。程序员用来指定私有变量的一种方式。不能用`from module import * `导入，其他方面和公有一样访问；
 
-`__foo`:这个有真正的意义:解析器用`_classname__foo`来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名._类名__xxx这样的方式可以访问.
+`__foo`：这个有真正的意义，解析器用`_classname__foo`来代替这个名字，以区别和其他类相同的命名，它无法直接像公有成员一样随便访问，通过`对象名._类名__xxx`这样的方式可以访问.
 
 详情见:http://stackoverflow.com/questions/1301346/the-meaning-of-a-single-and-a-double-underscore-before-an-object-name-in-python
 
 或者: http://www.zhihu.com/question/19754941
 
-## 8 字符串格式化:%和.format
+## 8 字符串格式化: `%` 和 `.format`
 
-.format在许多方面看起来更便利.对于`%`最烦人的是它无法同时传递一个变量和元组.你可能会想下面的代码不会有什么问题:
+`.format` 在许多方面看起来更便利。对于 `%` 最烦人的是它无法同时传递一个变量和元组。你可能会想下面的代码不会有什么问题：
 
 ```
 "hi there %s" % name
 ```
 
-但是,如果name恰好是(1,2,3),它将会抛出一个TypeError异常.为了保证它总是正确的,你必须这样做:
+但是,如果name恰好是(1,2,3)，它将会抛出一个TypeError异常。为了保证它总是正确的，你必须这样做：
 
 ```
 "hi there %s" % (name,)   # 提供一个单元素的数组而不是一个参数
 ```
 
-但是有点丑..format就没有这些问题.你给的第二个问题也是这样,.format好看多了.
+但是有点丑！`.format`就没有这些问题。
 
 你为什么不用它?
 
 * 不知道它(在读这个之前)
-* 为了和Python2.5兼容(譬如logging库建议使用`%`([issue #4](https://github.com/taizilongxu/interview_python/issues/4)))
+* 为了和Python2.5兼容(譬如logging库建议使用 `%` ([issue #4](https://github.com/taizilongxu/interview_python/issues/4)))
 
 http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 
 ## 9 迭代器和生成器
 
-这个是stackoverflow里python排名第一的问题,值得一看: http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python
+这个是stackoverflow里python排名第一的问题，值得一看: http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python
 
 这是中文版: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/1/README.html
 
@@ -381,9 +379,9 @@ http://stackoverflow.com/questions/5082452/python-string-formatting-vs-format
 
 ## 10 `*args` and `**kwargs`
 
-用`*args`和`**kwargs`只是为了方便并没有强制使用它们.
+用 `*args` 和 `**kwargs` 只是为了方便并没有强制使用它们。
 
-当你不确定你的函数里将要传递多少参数时你可以用`*args`.例如,它可以传递任意数量的参数:
+当你不确定你的函数里将要传递多少参数时你可以用 `*args`。例如，它可以传递任意数量的参数：
 
 ```python
 >>> def print_everything(*args):
@@ -408,15 +406,15 @@ cabbage = vegetable
 apple = fruit
 ```
 
-你也可以混着用.命名参数首先获得参数值然后所有的其他参数都传递给`*args`和`**kwargs`.命名参数在列表的最前端.例如:
+你也可以混着用，命名参数首先获得参数值然后所有的其他参数都传递给 `*args` 和 `**kwargs`。命名参数在列表的最前端，例如：
 
 ```
 def table_things(titlestring, **kwargs)
 ```
 
-`*args`和`**kwargs`可以同时在函数的定义中,但是`*args`必须在`**kwargs`前面.
+`*args` 和 `**kwargs` 可以同时在函数的定义中，但是 `*args` 必须在 `**kwargs` 前面。
 
-当调用函数时你也可以用`*`和`**`语法.例如:
+当调用函数时你也可以用 `*` 和 `**` 语法.例如：
 
 ```python
 >>> def print_three_things(a, b, c):
@@ -428,7 +426,7 @@ def table_things(titlestring, **kwargs)
 a = aardvark, b = baboon, c = cat
 ```
 
-就像你看到的一样,它可以传递列表(或者元组)的每一项并把它们解包.注意必须与它们在函数里的参数相吻合.当然,你也可以在函数定义或者函数调用时用*.
+就像你看到的一样，它可以传递列表(或者元组)的每一项并把它们解包。注意必须与它们在函数里的参数相吻合。
 
 http://stackoverflow.com/questions/3394835/args-and-kwargs
 
